@@ -1,0 +1,25 @@
+services:
+  db:
+    image: ankane/pgvector
+    env_file:
+      - .env
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata1:/var/lib/postgresql/data
+
+  api:
+    build: .
+    env_file:
+      - .env
+    working_dir: /app
+    volumes:
+      - ./:/app
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+
+volumes:
+  pgdata1:
