@@ -1,10 +1,11 @@
 from fastapi import FastAPI
 
-from app.routes import candidates
+from app.routes import agent, candidates
 
 app = FastAPI(title="Resume Processing API")
 
 app.include_router(candidates.router, prefix="/api", tags=["Candidate Details"])
+app.include_router(agent.router, prefix="/api", tags=["Agent"])
 
 if __name__ == "__main__":
     import uvicorn
